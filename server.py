@@ -1127,7 +1127,28 @@ async def pulse(include_archive: bool = False) -> str:
         )
 
     return status + "\n=== 记忆列表 ===\n" + "\n".join(lines)
-
+# =============================================================
+# Tool: fetch — Get bucket content by ID
+# =============================================================
+@mcp.tool()
+async def fetch(bucket_id: str) -> str:
+    """按bucket_id直接读取桶的完整内容。不走语义搜索。"""
+    try:
+        bucket = await bucket_mgr.get_bucket(bucket_id)
+    except Exception as e:
+        return f"读取失败: {e}"
+    if not bucket:
+        return f"找不到桶: {bucket_id}"
+    meta = bucket.get("metadata", {})
+    content = bucket.get("content", "（空）")
+    tags = ", ".join(meta.get("tags", []))
+    return (
+        f"bucket_id: {bucket_id}\n"
+        f"标签: {tags}\n"
+        f"重要度: {meta.get('importance', '?')}\n"
+        f"---\n"
+        f"{content}"
+    )
 
 # =============================================================
 # Tool 6: dream — Dreaming, digest recent memories
