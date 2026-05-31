@@ -32,7 +32,7 @@ class EmbeddingEngine:
         dehy_cfg = config.get("dehydration", {})
         embed_cfg = config.get("embedding", {})
 
-    self.api_key = (embed_cfg.get("api_key") or dehy_cfg.get("api_key") or os.environ.get("GEMINI_API_KEY") or "").strip()
+        self.api_key = (embed_cfg.get("api_key") or dehy_cfg.get("api_key") or os.environ.get("GEMINI_API_KEY") or "").strip()
 
         self.base_url = (
             (embed_cfg.get("base_url") or "").strip()
