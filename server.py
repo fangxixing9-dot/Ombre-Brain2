@@ -1134,7 +1134,7 @@ async def pulse(include_archive: bool = False) -> str:
 async def fetch(bucket_id: str) -> str:
     """Fetch full bucket content by bucket_id directly. No semantic search."""
     try:
-        bucket = await bucket_mgr.get_bucket(bucket_id)
+        bucket = await bucket_mgr.get(bucket_id)
     except Exception as e:
         return f"读取失败: {e}"
     if not bucket:
