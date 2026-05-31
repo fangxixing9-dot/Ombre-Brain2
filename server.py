@@ -1132,7 +1132,7 @@ async def pulse(include_archive: bool = False) -> str:
 # =============================================================
 @mcp.tool()
 async def fetch(bucket_id: str) -> str:
-    """按bucket_id直接读取桶的完整内容。不走语义搜索。"""
+    """Fetch full bucket content by bucket_id directly. No semantic search."""
     try:
         bucket = await bucket_mgr.get_bucket(bucket_id)
     except Exception as e:
